@@ -27,16 +27,11 @@ class DeviceUsage(object):
         if len(self.current_usages) > self.len:
             self.current_usages = self.current_usages[-self.len:]
 
-        if self.is_diff:
-            if self.min_value > usage:
-                self.min_value = max(usage - self.init_usage, 0)
-            if self.max_value < usage:
-                self.max_value = max(usage - self.init_usage, 0)
-        else:
-            if self.min_value > usage:
-                self.min_value = usage
-            if self.max_value < usage:
-                self.max_value = usage
+        if self.min_value > self.current_value:
+            self.min_value = self.current_value
+        if self.max_value < self.current_value:
+            self.max_value = self.current_value
+
         self.avg_value = sum(self.current_usages)/len(self.current_usages)
 
 
